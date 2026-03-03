@@ -50,7 +50,7 @@ function initGalaxy(){
   gStars=[];gDust=[];
   const arms=3,mn=Math.min(W,H);
   for(let i=0;i<4500;i++){
-    const ai=i%arms,ao=(ai/arms)*Math.PI*2,t=Math.random(),d=t*mn*0.22;
+    const ai=i%arms,ao=(ai/arms)*Math.PI*2,t=Math.random(),d=t*mn*0.55;
     const sa=ao+t*3.2+(Math.random()-0.5)*0.6;
     const sp=(Math.random()-0.5)*d*0.35*(1-t*0.3);
     const c=Math.cos(sa),s=Math.sin(sa);
@@ -62,14 +62,14 @@ function initGalaxy(){
       temp:Math.random()});
   }
   for(let i=0;i<1400;i++){
-    const a=Math.random()*Math.PI*2,r=Math.random()*Math.random()*mn*0.06;
+    const a=Math.random()*Math.PI*2,r=Math.random()*Math.random()*mn*0.15;
     gStars.push({lx:Math.cos(a)*r,ly:Math.sin(a)*r*0.45,
       size:(0.3+Math.random()*0.6)*DPR*0.7,alpha:0.4+Math.random()*0.6,
       twS:0.0002+Math.random()*0.0004,twP:Math.random()*Math.PI*2,
       temp:0.4+Math.random()*0.5});
   }
   for(let i=0;i<700;i++){
-    const ai=i%arms,ao=(ai/arms)*Math.PI*2,t=0.1+Math.random()*0.8,d=t*mn*0.2;
+    const ai=i%arms,ao=(ai/arms)*Math.PI*2,t=0.1+Math.random()*0.8,d=t*mn*0.5;
     const sa=ao+t*3.2+(Math.random()-0.5)*0.3;
     const c=Math.cos(sa),s=Math.sin(sa),sp=(Math.random()-0.5)*d*0.15;
     gDust.push({lx:c*d-s*sp,ly:(s*d+c*sp)*0.45,
@@ -83,15 +83,15 @@ function drawGalaxy(t,px,py){
   const mn=Math.min(W,H);
 
   // central glow
-  let gl=ctx.createRadialGradient(gcx+gpx,gcy+gpy,0,gcx+gpx,gcy+gpy,mn*0.12);
+  let gl=ctx.createRadialGradient(gcx+gpx,gcy+gpy,0,gcx+gpx,gcy+gpy,mn*0.3);
   gl.addColorStop(0,'rgba(255,248,235,0.06)');gl.addColorStop(0.3,'rgba(240,235,255,0.025)');
   gl.addColorStop(0.7,'rgba(220,225,255,0.008)');gl.addColorStop(1,'rgba(200,210,255,0)');
-  ctx.beginPath();ctx.arc(gcx+gpx,gcy+gpy,mn*0.12,0,Math.PI*2);ctx.fillStyle=gl;ctx.fill();
+  ctx.beginPath();ctx.arc(gcx+gpx,gcy+gpy,mn*0.3,0,Math.PI*2);ctx.fillStyle=gl;ctx.fill();
 
-  let gl2=ctx.createRadialGradient(gcx+gpx,gcy+gpy,0,gcx+gpx,gcy+gpy,mn*0.26);
+  let gl2=ctx.createRadialGradient(gcx+gpx,gcy+gpy,0,gcx+gpx,gcy+gpy,mn*0.6);
   gl2.addColorStop(0,'rgba(230,235,255,0.02)');gl2.addColorStop(0.5,'rgba(210,218,245,0.008)');
   gl2.addColorStop(1,'rgba(200,210,240,0)');
-  ctx.beginPath();ctx.arc(gcx+gpx,gcy+gpy,mn*0.26,0,Math.PI*2);ctx.fillStyle=gl2;ctx.fill();
+  ctx.beginPath();ctx.arc(gcx+gpx,gcy+gpy,mn*0.6,0,Math.PI*2);ctx.fillStyle=gl2;ctx.fill();
 
   for(const d of gDust){
     const rx=d.lx*cR-d.ly*sR,ry=d.lx*sR+d.ly*cR,x=gcx+rx+gpx,y=gcy+ry+gpy;
